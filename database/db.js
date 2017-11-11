@@ -30,5 +30,4 @@ let createNewPhotoEntry = function(photo) {
   new Photo(photoDetails).save(function(err) {
     if (err) return console.error(err);
   });
-
 }
