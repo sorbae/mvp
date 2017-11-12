@@ -8,9 +8,10 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`listening on port ${port}`));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
@@ -34,5 +35,9 @@ app.post('/usercollection', (req, res) => {
   .then(result => res.json(result))
   .catch(err => console.log(err))
 })
-// app.post()
-//   save received data to database
+
+app.put('/usercollection', (req, res) => {
+  db.removeEntryFromCollection(req.body.data)
+  .then(result => res.end())
+  .catch(err => console.log('ERRORRRRRRRRRRRRRRRR', err))
+})

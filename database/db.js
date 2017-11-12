@@ -35,3 +35,9 @@ module.exports.fetchUserCollection = function() {
     if (err) return console.error('error retrieving user collection: ', err)
   })
 }
+
+module.exports.removeEntryFromCollection = function(photoId) {
+  return Photo.remove({id: photoId}, function(err) {
+    if (err) return console.error('error deleting entry from user collection: ', err)
+  })
+}

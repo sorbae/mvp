@@ -1,12 +1,14 @@
 angular.module('pic-em')
   .component('collectionEntry', {
     bindings: {
-      entry: '<'
+      entry: '<',
+      remove: '<'
     },
 
     template: `
       <div class="thumbnail">
-        <a ng-href="{{$ctrl.entry.url}}"><img ng-src="{{$ctrl.entry.thumbnail}}"></a>
+        <button ng-click="$ctrl.remove($ctrl.entry.id)">x</button>
+        <a ng-href="{{$ctrl.entry.url}}" class="link"><img ng-src="{{$ctrl.entry.thumbnail}}"></a>
       </div>
     `
   })
