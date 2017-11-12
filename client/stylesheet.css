@@ -1,0 +1,12 @@
+body {
+}
+
+.display {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#display {
+  max-width: 50%;
+}
