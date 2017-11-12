@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const unsplash = require('./getRandomPhoto.js');
+const db = require('../database/db.js');
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`listening on port ${port}`));
@@ -14,13 +15,24 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/hello', (req, res) => {
+app.get('/dailyPic', (req, res) => {
   unsplash.getUnsplashPhoto()
-  .then((photo) => res.json(photo))
+  .then(photo => res.json(photo))
   .catch(err => console.error(err))
 });
 
+app.get('/usercollection', (req, res) => {
+  db.fetchUserCollection()
+  .then(collection => {
+    res.json(collection)
+  })
+  .catch(err => console.log(err))
+})
+
+app.post('/usercollection', (req, res) => {
+  db.createNewPhotoEntry(req.body.data)
+  .then(result => res.json(result))
+  .catch(err => console.log(err))
+})
 // app.post()
 //   save received data to database
-
-// getPhotoFromUnsplash
